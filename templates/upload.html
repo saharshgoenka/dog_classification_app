@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        /* Style the button label */
+        .button-label {
+            display: block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        /* Style for displaying the selected file name */
+        .file-name {
+            margin-top: 10px;
+        }
+
+        /* Style for the "Upload and Analyze" button */
+        .analyze-button {
+            display: block;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Style for the dog image */
+        .dog-image {
+            max-width: 200px; /* Adjust the image width as needed */
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dog Classification!</h1>
+        <!-- Use the "cute-dog.jpeg" image from the "static" folder -->
+        <img src="{{ url_for('static', filename='cute-dog.jpeg') }}" alt="Cute Dog" class="dog-image">
+        <form method="POST" enctype="multipart/form-data">
+            <label for="file" class="button-label">Choose a file</label>
+            <input type="file" name="file" id="file" accept="image/*">
+            <input type="submit" value="Upload and Analyze" class="analyze-button">
+            <div class="file-name" id="file-name"></div>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript to display the selected file name
+        document.getElementById('file').addEventListener('change', function() {
+            var fileName = this.value.split('\\').pop();
+            document.getElementById('file-name').textContent = 'Selected file: ' + fileName;
+        });
+    </script>
+</body>
+</html>
